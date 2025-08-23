@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.prose {
+  max-width: inherit !important;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/Inter.ttf) format("truetype");
+  }
+
+  @font-face {
+    font-family: "Courier Prime";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/CourierPrime.ttf) format("truetype");
+  }
+}
