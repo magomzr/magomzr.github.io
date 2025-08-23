@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Comments from "../components/Comments";
 import ScrollTopAndComment from "../components/ScrollTopAndComment";
-import { siteData } from "../config";
+import { config } from "../config";
 import Tag from "../components/Tag";
 import SectionContainer from "../components/SectionContainer";
 import PageTitle from "../components/PageTitle";
@@ -13,13 +13,7 @@ const postDateTemplate = {
   day: "numeric",
 };
 
-export default function PostLayout({
-  content,
-  authorDetails,
-  next,
-  prev,
-  children,
-}) {
+export default function PostLayout({ content, authorDetails, next, prev, children }) {
   const { createDate, title, tags } = content;
   const basePath = "";
 
@@ -35,10 +29,7 @@ export default function PostLayout({
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                     <time dateTime={createDate}>
-                      {new Date(createDate).toLocaleDateString(
-                        siteData.locale,
-                        postDateTemplate
-                      )}
+                      {new Date(createDate).toLocaleDateString(config.locale, postDateTemplate)}
                     </time>
                   </dd>
                 </div>
@@ -53,10 +44,7 @@ export default function PostLayout({
               <dt className="sr-only">Authors</dt>
               <dd>
                 <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
-                  <li
-                    className="flex items-center space-x-2"
-                    key={authorDetails.name}
-                  >
+                  <li className="flex items-center space-x-2" key={authorDetails.name}>
                     {authorDetails.avatar && (
                       <img
                         src={authorDetails.avatar}
@@ -68,9 +56,7 @@ export default function PostLayout({
                     )}
                     <dl className="whitespace-nowrap text-sm font-medium leading-5">
                       <dt className="sr-only">Name</dt>
-                      <dd className="text-gray-900 dark:text-gray-100">
-                        {authorDetails.name}
-                      </dd>
+                      <dd className="text-gray-900 dark:text-gray-100">{authorDetails.name}</dd>
                       <dt className="sr-only">LinkedIn</dt>
                       <dd>
                         {authorDetails.linkedin && (
@@ -78,10 +64,7 @@ export default function PostLayout({
                             href={authorDetails.linkedin}
                             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           >
-                            {authorDetails.linkedin.replace(
-                              "https://www.linkedin.com/in/",
-                              "@"
-                            )}
+                            {authorDetails.linkedin.replace("https://www.linkedin.com/in/", "@")}
                           </Link>
                         )}
                       </dd>
@@ -91,10 +74,8 @@ export default function PostLayout({
               </dd>
             </dl>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-                {children}
-              </div>
-              {siteData.comments && (
+              <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
+              {config.comments && (
                 <div
                   className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
                   id="comment"

@@ -1,8 +1,8 @@
-export const siteData = {
-  title: "Mario Gómez | Writings",
-  author: "Mario Gómez",
-  headerTitle: "Mario Gómez | Writings",
-  description: "See recent writings",
+export const config = {
+  title: "Mario Gomez | Notes",
+  author: "Mario Gomez",
+  headerTitle: "Mario Gomez",
+  description: "Recent Notes",
   language: "en-us",
   theme: "system",
   siteUrl: "https://d3w287eijv5ek9.cloudfront.net",

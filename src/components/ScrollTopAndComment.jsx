@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { siteData } from "../config";
+import { config } from "../config";
 
 const ScrollTopAndComment = () => {
   const [show, setShow] = useState(false);
@@ -22,11 +22,9 @@ const ScrollTopAndComment = () => {
   };
   return (
     <div
-      className={`fixed bottom-8 right-8 hidden flex-col gap-3 ${
-        show ? "md:flex" : "md:hidden"
-      }`}
+      className={`fixed bottom-8 right-8 hidden flex-col gap-3 ${show ? "md:flex" : "md:hidden"}`}
     >
-      {siteData.comments?.provider && (
+      {config.comments?.provider && (
         <button
           aria-label="Scroll To Comment"
           onClick={handleScrollToComment}

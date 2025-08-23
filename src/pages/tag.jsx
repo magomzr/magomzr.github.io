@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ListLayout from "../layouts/ListLayoutWithTags";
-import { postByTagService } from "../api";
+import apiService from "../services";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function TagPage() {
@@ -14,7 +14,7 @@ export default function TagPage() {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await postByTagService.get(`/?tag=${tag}`);
+        const response = await apiService.postByTag.get(`/?tag=${tag}`);
         setPosts(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);

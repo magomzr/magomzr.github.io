@@ -1,8 +1,8 @@
 import { KBarButton } from "./legacy-pliny/KBarButton";
-import { siteData } from "../config";
+import { config } from "../config";
 
 const SearchButton = () => {
-  if (siteData.search) {
+  if (config.search) {
     return (
       <KBarButton aria-label="Search">
         <svg

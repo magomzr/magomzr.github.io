@@ -1,12 +1,6 @@
 import { useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
-import {
-  draftService,
-  jwtService,
-  postByIdService,
-  postMainService,
-  setAuthToken,
-} from "../api";
+import apiService, { setAuthToken } from "../services";
 import MDEditor from "@uiw/react-md-editor";
 import TagsInput from "react-tagsinput";
 import toast, { Toaster } from "react-hot-toast";
@@ -48,14 +42,14 @@ export default function Editor() {
         layout: "PostSimple",
         isDraft: IsDraft,
         tags: tags,
-        author: "Mario Gómez",
+        author: "Mario Gomez",
         content: JSON.stringify(value),
       };
       if (IsEdit) {
-        await postMainService.put(`/${blogId}`, post);
+        await apiService.postMain.put(`/${blogId}`, post);
         toast.success("Updated");
       } else {
-        await postMainService.post("/", post);
+        await apiService.postMain.post("/", post);
         toast.success("Created");
       }
       setSaved(true);
@@ -71,7 +65,7 @@ export default function Editor() {
     try {
       setIsLoading(true);
       const id = directId ? directId : blogId;
-      const response = await postByIdService.get(`/${id}`);
+      const response = await apiService.postById.get(`/${id}`);
       if (!response.data.id) {
         setIsLoading(false);
         return;
@@ -92,22 +86,18 @@ export default function Editor() {
   const authorize = async (e) => {
     e.preventDefault();
     try {
-      const response = await jwtService.get(`?userSecret=${secret}`);
+      const response = await apiService.jwt.get(`?userSecret=${secret}`);
       setAuthToken(response.data);
       setAuthorized(true);
       draftPosts();
     } catch (error) {
-      setError(
-        error.response.status === 400
-          ? "Secret key is invalid"
-          : "Something went wrong"
-      );
+      setError(error.response.status === 400 ? "Secret key is invalid" : "Something went wrong");
     }
   };
 
   const draftPosts = async () => {
     try {
-      const response = await draftService.get("/");
+      const response = await apiService.draft.get("/");
       setDrafts(response.data);
     } catch (error) {
       console.error(error);
@@ -210,48 +200,39 @@ export default function Editor() {
               {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
             </div>
           ) : (
-            <>
-              <div className="flex flex-row space-x-2">
-                <div className="w-full mt-4">
-                  <h3 className="text-xl text-blue-600 font-semibold">
-                    Drafts
-                  </h3>
+            <div className="flex flex-row space-x-2">
+              <div className="w-full mt-4">
+                <h3 className="text-xl text-blue-600 font-semibold">Drafts</h3>
 
-                  {drafts.length === 0 && (
-                    <p className="mt-2 text-sm">No drafts found.</p>
-                  )}
-                  <ul>
-                    {drafts.map((el) => {
-                      return (
-                        <div
-                          key={el.id}
-                          className="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
-                        >
-                          <li>
-                            {el.title}{" "}
-                            <button
-                              className="ml-5 px-3 py-1 text-xs font-medium text-center text-white bg-purple-700 rounded hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                              onClick={(e) => draftClick(e, el.id)}
-                            >
-                              Edit
-                            </button>
-                          </li>
-                        </div>
-                      );
-                    })}
-                  </ul>
-                </div>
-                <div className="mt-4 justify-end items-end text-align-right justify-items-end w-48">
-                  <button
-                    className="bg-primary-500 py-1 px-8 mt-1 rounded text-white"
-                    onClick={save}
-                  >
-                    {IsEdit ? "Update" : "Save"}
-                  </button>
-                  <p className="mt-2 text-gray-400 text-sm">Authorized</p>
-                </div>
+                {drafts.length === 0 && <p className="mt-2 text-sm">No drafts found.</p>}
+                <ul>
+                  {drafts.map((el) => {
+                    return (
+                      <div
+                        key={el.id}
+                        className="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
+                      >
+                        <li>
+                          {el.title}{" "}
+                          <button
+                            className="ml-5 px-3 py-1 text-xs font-medium text-center text-white bg-purple-700 rounded hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            onClick={(e) => draftClick(e, el.id)}
+                          >
+                            Edit
+                          </button>
+                        </li>
+                      </div>
+                    );
+                  })}
+                </ul>
               </div>
-            </>
+              <div className="mt-4 justify-end items-end text-align-right justify-items-end w-48">
+                <button className="bg-primary-500 py-1 px-8 mt-1 rounded text-white" onClick={save}>
+                  {IsEdit ? "Update" : "Save"}
+                </button>
+                <p className="mt-2 text-gray-400 text-sm">Authorized</p>
+              </div>
+            </div>
           )}
           {IsSaved && (
             <Toaster

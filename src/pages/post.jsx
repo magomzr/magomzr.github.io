@@ -1,12 +1,12 @@
 import { Suspense, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PageTitle from "../components/PageTitle";
-import { postByIdService } from "../api";
+import apiService from "../services";
 import PostLayout from "../layouts/PostLayout";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { siteData } from "../config";
+import { config } from "../config";
 
 const isProduction = true;
 
@@ -29,14 +29,12 @@ const Post = () => {
 
     const fetchPostData = async () => {
       try {
-        const response = await postByIdService.get(`/${id}`);
+        const response = await apiService.postById.get(`/${id}`);
         const postData = response.data;
 
         // Set previous and next post navigation
         setPrev({
-          path: `${
-            postData?.previous?.id ? `blog/${postData?.previous?.id}` : ""
-          }`,
+          path: `${postData?.previous?.id ? `blog/${postData?.previous?.id}` : ""}`,
           title: `Previous - ${postData?.previous?.title}`,
         });
         setNext({
@@ -72,31 +70,29 @@ const Post = () => {
           </PageTitle>
         </div>
       ) : (
-        <>
-          <Suspense fallback={<LoadingSpinner />}>
-            <PostLayout
-              content={{
-                filepath: "",
-                path: "",
-                slug: id,
-                createDate: post?.createDate,
-                title: post?.title,
-                tags: post?.tags,
-              }}
-              authorDetails={{
-                name: siteData.author,
-                linkedin: siteData.linkedin,
-                avatar: siteData.avatar,
-              }}
-              next={next}
-              prev={prev}
-            >
-              <Markdown className="prose" remarkPlugins={[remarkGfm]}>
-                {content}
-              </Markdown>
-            </PostLayout>
-          </Suspense>
-        </>
+        <Suspense fallback={<LoadingSpinner />}>
+          <PostLayout
+            content={{
+              filepath: "",
+              path: "",
+              slug: id,
+              createDate: post?.createDate,
+              title: post?.title,
+              tags: post?.tags,
+            }}
+            authorDetails={{
+              name: config.author,
+              linkedin: config.linkedin,
+              avatar: config.avatar,
+            }}
+            next={next}
+            prev={prev}
+          >
+            <Markdown className="prose" remarkPlugins={[remarkGfm]}>
+              {content}
+            </Markdown>
+          </PostLayout>
+        </Suspense>
       )}
     </>
   );

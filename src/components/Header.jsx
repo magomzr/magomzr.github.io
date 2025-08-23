@@ -1,5 +1,5 @@
 import { headerNavLinks } from "../utils";
-import { siteData } from "../config";
+import { config } from "../config";
 import { Link } from "react-router-dom";
 import SearchButton from "./SearchButton";
 import MobileNav from "./MobileNav";
@@ -9,17 +9,15 @@ const Header = () => {
   return (
     <header className="flex items-center justify-between py-3 fixed inset-x-0 top-0 z-40 bg-gray/80 shadow-sm saturate-100 backdrop-blur-[10px]">
       <div>
-        <Link to="/" aria-label={siteData.headerTitle}>
+        <Link to="/" aria-label={config.headerTitle}>
           <div className="flex items-center justify-between">
             <div className="mr-3">
               <Logo />
             </div>
-            {typeof siteData.headerTitle === "string" ? (
-              <div className="hidden text-2xl font-semibold sm:block">
-                {siteData.headerTitle}
-              </div>
+            {typeof config.headerTitle === "string" ? (
+              <div className="hidden text-2xl font-semibold sm:block">{config.headerTitle}</div>
             ) : (
-              siteData.headerTitle
+              config.headerTitle
             )}
             <span className="bg-purple-100 text-purple-800 text-xs font-medium mx-2 mt-1 px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300">
               Open to work

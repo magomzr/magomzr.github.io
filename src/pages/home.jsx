@@ -7,8 +7,8 @@ import { formatDate } from "../utils";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Tag from "../components/Tag";
 
-import { siteData } from "../config";
-import { tagsService, postMainService } from "../api";
+import { config } from "../config";
+import apiService from "../services";
 
 const MAX_DISPLAY = 5;
 
@@ -21,7 +21,7 @@ export default function Home() {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await postMainService.get("/");
+        const response = await apiService.postMain.get("/");
         const postsResponse = response.data.sort((a, b) => {
           return new Date(b.createDate) - new Date(a.createDate);
         });
@@ -39,7 +39,7 @@ export default function Home() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await tagsService.get("/");
+        const response = await apiService.tags.get("/");
         setTagsObject(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -62,14 +62,11 @@ export default function Home() {
           <div className="flex items-center justify-between mt-7">
             <div className="my-6">
               <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-                <span className="wave">Hi, I&apos;m </span>
-                <span className="text-gray-500 dark:text-blue-400">
-                  Mario Gómez
-                </span>
+                {/* <span className="wave">Hi, I&apos;m </span> */}
+                <span className="text-gray-500 dark:text-blue-400">Blog</span>
               </h1>
               <p className="text-indigo-600 text-xl mt-2 mb-6">
-                Insights from an experienced semi-senior full stack engineer who
-                loves to code.
+                Research and information I learn while coding and studying.
               </p>
               <a
                 type="button"
@@ -82,6 +79,7 @@ export default function Home() {
               <a
                 type="button"
                 href="https://github.com/magomzr"
+                target="_blank"
                 className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
               >
                 See my GitHub
@@ -95,7 +93,7 @@ export default function Home() {
                   Recent
                 </h1>
                 <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-                  {siteData.description}
+                  {config.description}
                 </p>
               </div>
               <div className="pt-10 pl-5">
@@ -120,16 +118,13 @@ export default function Home() {
                         ))}
                       </div>
 
-                      <Link
-                        to={`/posts/${id}`}
-                        className="text-gray-900 dark:text-gray-100"
-                      >
+                      <Link to={`/posts/${id}`} className="text-gray-900 dark:text-gray-100">
                         <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                           <dl>
                             <dt className="sr-only">Published on</dt>
                             <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400 pl-5">
                               <time dateTime={createDate}>
-                                {formatDate(createDate, siteData.locale)}
+                                {formatDate(createDate, config.locale)}
                               </time>
                             </dd>
                           </dl>
@@ -171,7 +166,7 @@ export default function Home() {
               </Link>
             </div>
           )}
-          {siteData.newsletter?.provider && (
+          {config.newsletter?.provider && (
             <div className="flex items-center justify-center">
               <NewsletterForm />
             </div>

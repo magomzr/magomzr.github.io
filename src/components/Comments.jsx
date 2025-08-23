@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { Giscus } from "./legacy-pliny/Giscus";
-import { siteData } from "../config";
+import { config } from "../config";
 
 export default function Comments() {
   const [loadComments, setLoadComments] = useState(true);
-  const { giscusConfig } = siteData.comments;
+  const { giscusConfig } = config.comments;
   return (
     <>
-      {!loadComments && (
-        <button onClick={() => setLoadComments(true)}>Load Comments</button>
-      )}
+      {!loadComments && <button onClick={() => setLoadComments(true)}>Load Comments</button>}
       {giscusConfig && loadComments && (
         <Giscus
           repo={giscusConfig.repo}
