@@ -5,9 +5,6 @@ import { blogConfig } from "../config";
 const ENDPOINTS = {
   jwt: "jwtServiceUrl",
   postMain: "postMainServiceUrl",
-  postById: "postByIdServiceUrl",
-  tags: "tagsServiceUrl",
-  postByTag: "postByTagServiceUrl",
   draft: "draftServiceUrl",
   search: "searchServiceUrl",
 };

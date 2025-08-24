@@ -5,7 +5,7 @@ import MDEditor from "@uiw/react-md-editor";
 import TagsInput from "react-tagsinput";
 import toast, { Toaster } from "react-hot-toast";
 import "../css/tags-input.css";
-// --------------
+import { postService } from "../services/api";
 
 const mkdStr = `# Markdown Editor
 
@@ -64,8 +64,8 @@ export default function Editor() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const id = directId ? directId : blogId;
-      const response = await apiService.postById.get(`/${id}`);
+      const id = directId || blogId;
+      const response = await postService.get(`/${id}`);
       if (!response.data.id) {
         setIsLoading(false);
         return;

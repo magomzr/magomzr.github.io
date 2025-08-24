@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ListLayoutWithTags from "../layouts/ListLayoutWithTags";
-import apiService from "../services";
+import { postService } from "../services/api";
 
 const POSTS_PER_PAGE = 5;
 
@@ -13,7 +13,7 @@ export default function Posts() {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await apiService.postMain.get("/");
+        const response = await postService.get();
         const postsResponse = response.data.sort((a, b) => {
           return new Date(b.createDate) - new Date(a.createDate);
         });

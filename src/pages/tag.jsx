@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ListLayout from "../layouts/ListLayoutWithTags";
 import apiService from "../services";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { tagService } from "../services/api";
 
 export default function TagPage() {
   const { tag } = useParams();
@@ -14,7 +15,7 @@ export default function TagPage() {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await apiService.postByTag.get(`/?tag=${tag}`);
+        const response = await tagService.get(`/${tag}`);
         setPosts(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);

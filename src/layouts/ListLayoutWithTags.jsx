@@ -3,8 +3,8 @@ import { slug } from "github-slugger";
 import { useEffect, useState } from "react";
 import { config } from "../config";
 import Tag from "../components/Tag";
-import apiService from "../services";
 import { formatDate } from "../utils";
+import { tagService } from "../services/api";
 
 function Pagination({ totalPages, currentPage }) {
   const location = useLocation();
@@ -54,7 +54,7 @@ export default function ListLayoutWithTags({ posts, title, initialDisplayPosts =
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await apiService.tags.get("/");
+        const response = await tagService.get();
         setTagsObject(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

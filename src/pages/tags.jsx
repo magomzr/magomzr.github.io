@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Tag from "../components/Tag";
-import apiService from "../services";
+import { tagService } from "../services/api";
 
 export default function Tags() {
   const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ export default function Tags() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await apiService.tags.get("/");
+        const response = await tagService.get();
         setTagsObject(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

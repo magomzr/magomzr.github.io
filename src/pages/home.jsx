@@ -8,7 +8,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import Tag from "../components/Tag";
 
 import { config } from "../config";
-import apiService from "../services";
+import { postService, tagService } from "../services/api";
 
 const MAX_DISPLAY = 5;
 
@@ -21,7 +21,7 @@ export default function Home() {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await apiService.postMain.get("/");
+        const response = await postService.get();
         const postsResponse = response.data.sort((a, b) => {
           return new Date(b.createDate) - new Date(a.createDate);
         });
@@ -39,7 +39,7 @@ export default function Home() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await apiService.tags.get("/");
+        const response = await tagService.get();
         setTagsObject(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -1,12 +1,12 @@
 import { Suspense, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PageTitle from "../components/PageTitle";
-import apiService from "../services";
 import PostLayout from "../layouts/PostLayout";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { config } from "../config";
+import { postService } from "../services/api";
 
 const isProduction = true;
 
@@ -29,7 +29,7 @@ const Post = () => {
 
     const fetchPostData = async () => {
       try {
-        const response = await apiService.postById.get(`/${id}`);
+        const response = await postService.get(`/${id}`);
         const postData = response.data;
 
         // Set previous and next post navigation
