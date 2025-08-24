@@ -1,11 +1,11 @@
 import { useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
-import apiService, { setAuthToken } from "../services";
+import apiService from "../services";
 import MDEditor from "@uiw/react-md-editor";
 import TagsInput from "react-tagsinput";
 import toast, { Toaster } from "react-hot-toast";
 import "../css/tags-input.css";
-import { postService } from "../services/api";
+import { draftService, postService, tokenService } from "../services/api";
 
 const mkdStr = `# Markdown Editor
 
@@ -23,9 +23,10 @@ export default function Editor() {
   const [blogId, setBlog] = useState("");
   const [IsSaved, setSaved] = useState(false);
   const [IsDraft, setDraft] = useState(false);
-  const [secret, setSecret] = useState("");
+  const [secretKey, setSecretKey] = useState("");
   const [summary, setSummary] = useState("");
   const [tags, setTags] = useState([]);
+  const [token, setToken] = useState("");
   const [IsAuthorized, setAuthorized] = useState(false);
   const [IsEdit, setIsEdit] = useState(false);
   const [loading, setIsLoading] = useState(false);
@@ -86,18 +87,18 @@ export default function Editor() {
   const authorize = async (e) => {
     e.preventDefault();
     try {
-      const response = await apiService.jwt.get(`?userSecret=${secret}`);
-      setAuthToken(response.data);
+      const { data } = await tokenService.post("", { secretKey });
       setAuthorized(true);
-      draftPosts();
+      draftPosts(data.token);
     } catch (error) {
-      setError(error.response.status === 400 ? "Secret key is invalid" : "Something went wrong");
+      console.log({ error });
+      setError("Something went wrong", error.message);
     }
   };
 
-  const draftPosts = async () => {
+  const draftPosts = async (token) => {
     try {
-      const response = await apiService.draft.get("/");
+      const response = await draftService(token).get();
       setDrafts(response.data);
     } catch (error) {
       console.error(error);
@@ -186,8 +187,8 @@ export default function Editor() {
               <input
                 className="border-gray-300 border-2 px-2 py-1 rounded text-sm"
                 type="text"
-                value={secret}
-                onChange={(e) => setSecret(e.target.value)}
+                value={secretKey}
+                onChange={(e) => setSecretKey(e.target.value)}
                 placeholder="Secret key"
               />
               <button

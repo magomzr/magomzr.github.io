@@ -14,3 +14,19 @@ export const postService = axios.create({
 export const tagService = axios.create({
   baseURL: `${mainUrl}/tags`,
 });
+
+export const tokenService = axios.create({
+  baseURL: `${mainUrl}/token`,
+});
+
+export const draftService = (token) => {
+  const service = axios.create({
+    baseURL: `${mainUrl}/drafts`,
+  });
+
+  if (token) {
+    service.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+
+  return service;
+};
