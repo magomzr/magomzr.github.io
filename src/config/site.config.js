@@ -12,8 +12,8 @@ export const config = {
   linkedin: "https://www.linkedin.com/in/mariogomeza/",
   locale: "en-US",
   analytics: {
-    umamiAnalytics: {
-      umamiWebsiteId: "3b0c5b29-6e9b-43f5-ae44-f4bb0c1a14f3",
+    umami: {
+      websiteId: "3b0c5b29-6e9b-43f5-ae44-f4bb0c1a14f3",
     },
   },
   // newsletter: {

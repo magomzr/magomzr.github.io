@@ -1,10 +1,10 @@
 import { Umami } from "./legacy-pliny/Umami";
 
-export const Analytics = ({ analyticsConfig }) => {
+export const Analytics = ({ analytics }) => {
   return (
     <>
-      {analyticsConfig.umamiAnalytics && (
-        <Umami {...analyticsConfig.umamiAnalytics} />
+      {analytics.umami && (
+        <Umami {...analytics.umami} />
       )}
     </>
   );
