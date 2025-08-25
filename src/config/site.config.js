@@ -11,14 +11,6 @@ export const config = {
   github: "https://github.com/magomzr",
   linkedin: "https://www.linkedin.com/in/mariogomeza/",
   locale: "en-US",
-  analytics: {
-    umami: {
-      websiteId: "3b0c5b29-6e9b-43f5-ae44-f4bb0c1a14f3",
-    },
-  },
-  // newsletter: {
-  //   provider: "emailoctopus",
-  // },
   comments: {
     provider: "giscus",
     giscusConfig: {
