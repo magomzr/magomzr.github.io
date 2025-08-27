@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ListLayout from "../layouts/ListLayoutWithTags";
-import apiService from "../services";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { tagService } from "../services/api";
 

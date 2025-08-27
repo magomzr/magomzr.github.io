@@ -87,8 +87,10 @@ export default function Editor() {
     e.preventDefault();
     try {
       const { data } = await tokenService.post("", { secretKey });
+      const { token } = data;
       setAuthorized(true);
-      draftPosts(data.token);
+      setToken(token);
+      draftPosts(token);
     } catch (error) {
       console.log({ error });
       setError("Something went wrong", error.message);
