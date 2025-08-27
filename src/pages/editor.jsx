@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import MDEditor from "@uiw/react-md-editor";
 import TagsInput from "react-tagsinput";
@@ -31,6 +31,7 @@ export default function Editor() {
   const [loading, setIsLoading] = useState(false);
   const [drafts, setDrafts] = useState([]);
   const [error, setError] = useState("");
+  const tokenRef = useRef("");
 
   const save = async (e) => {
     e.preventDefault();
@@ -45,11 +46,14 @@ export default function Editor() {
         author: "Mario Gomez",
         content: JSON.stringify(value),
       };
+
+      const currentToken = tokenRef.current || token;
+
       if (IsEdit) {
-        await protectedEndpointService(token, "posts").put(`/${blogId}`, post);
+        await protectedEndpointService(currentToken, "posts").put(`/${blogId}`, post);
         toast.success("Updated");
       } else {
-        await protectedEndpointService(token, "posts").post("", post);
+        await protectedEndpointService(currentToken, "posts").post("", post);
         toast.success("Created");
       }
       setSaved(true);
@@ -90,6 +94,7 @@ export default function Editor() {
       const { token } = data;
       setAuthorized(true);
       setToken(token);
+      tokenRef.current = token;
       draftPosts(token);
     } catch (error) {
       console.log({ error });
@@ -97,9 +102,10 @@ export default function Editor() {
     }
   };
 
-  const draftPosts = async (token) => {
+  const draftPosts = async (providedToken = null) => {
     try {
-      const response = await protectedEndpointService(token, "drafts").get();
+      const currentToken = providedToken || tokenRef.current || token;
+      const response = await protectedEndpointService(currentToken, "drafts").get();
       setDrafts(response.data);
     } catch (error) {
       console.error(error);
