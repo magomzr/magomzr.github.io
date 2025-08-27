@@ -19,9 +19,9 @@ export const tokenService = axios.create({
   baseURL: `${mainUrl}/token`,
 });
 
-export const draftService = (token) => {
+export const protectedEndpointService = (token, path) => {
   const service = axios.create({
-    baseURL: `${mainUrl}/drafts`,
+    baseURL: `${mainUrl}/${path}`,
   });
 
   if (token) {

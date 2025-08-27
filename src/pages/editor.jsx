@@ -1,11 +1,10 @@
 import { useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
-import apiService from "../services";
 import MDEditor from "@uiw/react-md-editor";
 import TagsInput from "react-tagsinput";
 import toast, { Toaster } from "react-hot-toast";
 import "../css/tags-input.css";
-import { draftService, postService, tokenService } from "../services/api";
+import { protectedEndpointService, postService, tokenService } from "../services/api";
 
 const mkdStr = `# Markdown Editor
 
@@ -47,10 +46,10 @@ export default function Editor() {
         content: JSON.stringify(value),
       };
       if (IsEdit) {
-        await apiService.postMain.put(`/${blogId}`, post);
+        await protectedEndpointService(token, "posts").put(`/${blogId}`, post);
         toast.success("Updated");
       } else {
-        await apiService.postMain.post("/", post);
+        await protectedEndpointService(token, "posts").post("", post);
         toast.success("Created");
       }
       setSaved(true);
@@ -98,7 +97,7 @@ export default function Editor() {
 
   const draftPosts = async (token) => {
     try {
-      const response = await draftService(token).get();
+      const response = await protectedEndpointService(token, "drafts").get();
       setDrafts(response.data);
     } catch (error) {
       console.error(error);
