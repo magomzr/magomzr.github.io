@@ -31,6 +31,7 @@ export default function Editor() {
   const [loading, setIsLoading] = useState(false);
   const [drafts, setDrafts] = useState([]);
   const [error, setError] = useState("");
+  const [originalPost, setOriginalPost] = useState(null);
   const tokenRef = useRef("");
 
   const save = async (e) => {
@@ -50,7 +51,15 @@ export default function Editor() {
       const currentToken = tokenRef.current || token;
 
       if (IsEdit) {
-        await protectedEndpointService(currentToken, "posts").put(`/${blogId}`, post);
+        const updatedPost = {
+          ...originalPost,
+          title: title,
+          summary: summary,
+          isDraft: IsDraft,
+          tags: tags,
+          content: JSON.stringify(value),
+        };
+        await protectedEndpointService(currentToken, "posts").put(`/${blogId}`, updatedPost);
         toast.success("Updated");
       } else {
         await protectedEndpointService(currentToken, "posts").post("", post);
@@ -74,6 +83,7 @@ export default function Editor() {
         setIsLoading(false);
         return;
       }
+      setOriginalPost(response.data);
       const parsedContent = JSON.parse(response.data.content);
       setValue(parsedContent);
       setTitle(response.data.title);
