@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import NotFound from "./pages/not-found";
 import Home from "./pages/home";
 import Tags from "./pages/tags";
@@ -11,7 +11,7 @@ import Editor from "./pages/editor";
 import { MainLayout } from "./layouts/MainLayout";
 import "./index.css";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <MainLayout />,
     children: [
