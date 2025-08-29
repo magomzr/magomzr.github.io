@@ -12,6 +12,40 @@ const isProduction = true;
 
 const isValidId = (id) => /^[0-9a-fA-F]{24}$/.test(id);
 
+// Custom link renderer for react-markdown to handle anchor links with HashRouter
+const LinkRenderer = ({ href, children, ...props }) => {
+  // Handle anchor links (starting with #)
+  if (href && href.startsWith('#')) {
+    return (
+      <a 
+        href={href} 
+        onClick={(e) => {
+          e.preventDefault();
+          const element = document.getElementById(href.slice(1));
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+  
+  // Handle external links
+  if (href && (href.startsWith('http') || href.startsWith('mailto:'))) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+        {children}
+      </a>
+    );
+  }
+  
+  // Handle internal links (fallback to regular anchor tag)
+  return <a href={href} {...props}>{children}</a>;
+};
+
 const Post = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -34,11 +68,11 @@ const Post = () => {
 
         // Set previous and next post navigation
         setPrev({
-          path: `${postData?.previous?.id ? `blog/${postData?.previous?.id}` : ""}`,
+          path: `${postData?.previous?.id ? `posts/${postData?.previous?.id}` : ""}`,
           title: `Previous - ${postData?.previous?.title}`,
         });
         setNext({
-          path: `${postData?.next?.id ? `blog/${postData?.next?.id}` : ""}`,
+          path: `${postData?.next?.id ? `posts/${postData?.next?.id}` : ""}`,
           title: `Next - ${postData?.next?.title}`,
         });
 
@@ -88,7 +122,13 @@ const Post = () => {
             next={next}
             prev={prev}
           >
-            <Markdown className="prose" remarkPlugins={[remarkGfm]}>
+            <Markdown 
+              className="prose" 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                a: LinkRenderer
+              }}
+            >
               {content}
             </Markdown>
           </PostLayout>
