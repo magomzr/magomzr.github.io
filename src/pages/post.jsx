@@ -17,8 +17,8 @@ const LinkRenderer = ({ href, children, ...props }) => {
   // Handle anchor links (starting with #)
   if (href && href.startsWith('#')) {
     return (
-      <a 
-        href={href} 
+      <button 
+        className="text-primary-600 hover:text-primary-500 underline cursor-pointer"
         onClick={(e) => {
           e.preventDefault();
           const element = document.getElementById(href.slice(1));
@@ -26,10 +26,11 @@ const LinkRenderer = ({ href, children, ...props }) => {
             element.scrollIntoView({ behavior: 'smooth' });
           }
         }}
+        title={`Jump to ${href}`}
         {...props}
       >
         {children}
-      </a>
+      </button>
     );
   }
   
