@@ -60,12 +60,14 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                       <dt className="sr-only">LinkedIn</dt>
                       <dd>
                         {authorDetails.linkedin && (
-                          <Link
+                          <a
                             href={authorDetails.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           >
                             {authorDetails.linkedin.replace("https://www.linkedin.com/in/", "@")}
-                          </Link>
+                          </a>
                         )}
                       </dd>
                     </dl>
@@ -106,7 +108,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           Previous Article
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${prev.path}`}>{prev.title}</Link>
+                          <Link to={`/${prev.path}`}>{prev.title}</Link>
                         </div>
                       </div>
                     )}
@@ -116,7 +118,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           Next Article
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${next.path}`}>{next.title}</Link>
+                          <Link to={`/${next.path}`}>{next.title}</Link>
                         </div>
                       </div>
                     )}
@@ -125,7 +127,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </div>
               <div className="pt-4 xl:pt-8">
                 <Link
-                  href={`/${basePath}`}
+                  to={`/${basePath}`}
                   className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                   aria-label="Back to the blog"
                 >
