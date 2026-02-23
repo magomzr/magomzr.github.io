@@ -16,6 +16,14 @@
   }
 
   @font-face {
+    font-family: "LatinRoman";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/LatinRoman.otf) format("opentype");
+  }
+
+  @font-face {
     font-family: "Courier Prime";
     font-style: normal;
     font-weight: 400;

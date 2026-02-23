@@ -1,0 +1,5 @@
+<div class="navbar-container">
+  @for (route of routes; track route.title) {
+    <a routerLink="{{ route.path }}">{{ route.title }} </a>
+  }
+</div>

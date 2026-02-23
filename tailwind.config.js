@@ -14,7 +14,8 @@ export default {
         14: "3.5rem",
       },
       fontFamily: {
-        sans: ["Inter", ...fontFamily.sans],
+        // sans: ["Inter", ...fontFamily.sans],
+        sans: ["LatinRoman", ...fontFamily.sans],
         mono: ["Courier Prime", ...fontFamily.mono],
       },
       colors: {
