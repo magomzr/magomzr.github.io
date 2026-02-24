@@ -16,4 +16,8 @@ export class PostService {
   getPostById(id: string): Observable<Post | undefined> {
     return this.getAllPosts().pipe(map((posts) => posts.find((post) => post.id === id)));
   }
+
+  getPostByTag(tag: string): Observable<Post[]> {
+    return this.getAllPosts().pipe(map((posts) => posts.filter((post) => post.tags.includes(tag))));
+  }
 }

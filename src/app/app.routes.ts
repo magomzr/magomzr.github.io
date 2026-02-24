@@ -16,6 +16,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/posts/posts').then((m) => m.Posts),
   },
   {
+    path: 'tags/:tag',
+    loadComponent: () => import('./pages/tags/tags').then((m) => m.Tags),
+  },
+  {
     path: '**',
     loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound),
   },

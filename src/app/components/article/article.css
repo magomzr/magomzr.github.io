@@ -72,3 +72,12 @@ div img {
     display: block;
     margin: 1.5rem auto;
 }
+
+.tag-link {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.tag-link:hover {
+    text-decoration: underline;
+}

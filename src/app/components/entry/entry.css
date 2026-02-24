@@ -21,3 +21,12 @@ p {
 p:last-child {
     margin-bottom: 0;
 }
+
+.tag-link {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.tag-link:hover {
+    text-decoration: underline;
+}

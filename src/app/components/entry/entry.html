@@ -1,4 +1,9 @@
 <h2><a routerLink="/posts/{{post().id}}">{{ post().title }}</a></h2>
 <p>{{ post().createdAt | date: 'longDate' }}</p>
 <p>{{ post().summary }}</p>
-<p><b>tags: </b>{{ post().tags.join(', ') }}</p>
+<p>
+  <b>tags: </b>
+  @for (tag of post().tags; track tag; let isLast = $last) {
+  <a class="tag-link" routerLink="/tags/{{tag}}">{{ tag }}</a>@if (!isLast) {<span>, </span>}
+  }
+</p>
