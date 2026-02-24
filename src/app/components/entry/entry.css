@@ -1,0 +1,23 @@
+:host {
+    display: block;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(11, 26, 0, 0.2);
+}
+
+:host:last-child {
+    border-bottom: none;
+}
+
+h2 {
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 0.75rem;
+    color: rgba(11, 26, 0, 0.8);
+}
+
+p:last-child {
+    margin-bottom: 0;
+}

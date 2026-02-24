@@ -1,6 +1,7 @@
 .navbar-container {
   display: flex;
-  justify-content: space-around;
-  margin: auto;
-  max-width: 50%;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgb(11, 26, 0);
 }

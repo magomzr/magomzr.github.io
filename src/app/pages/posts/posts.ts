@@ -4,11 +4,11 @@ import { PostService } from '../../services/post.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Post } from '../../types';
 import { Article } from '../../components/article/article';
-import { Footer } from '../../components/footer/footer';
+import { BackToPosts } from '../../components/back-to-posts/back-to-posts';
 
 @Component({
   selector: 'app-post',
-  imports: [Article, Footer],
+  imports: [Article, BackToPosts],
   templateUrl: './posts.html',
   styleUrl: './posts.css',
 })

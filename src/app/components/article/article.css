@@ -1,0 +1,67 @@
+h2 {
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+div {
+    margin: 2rem 0;
+    line-height: 1.7;
+}
+
+div p {
+    margin-bottom: 1.5rem;
+}
+
+div h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+div ul,
+div ol {
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+::ng-deep ul,
+::ng-deep ol {
+    padding-left: 2rem !important;
+    margin-left: 0 !important;
+    list-style-position: inside;
+}
+
+div li {
+    margin-bottom: 0.5rem;
+}
+
+div code {
+    background: rgba(11, 26, 0, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'courier-prime', monospace;
+    font-size: 0.9em;
+}
+
+div pre {
+    background: rgba(11, 26, 0, 0.05);
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+div img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+}
+
+::ng-deep hr {
+    margin: 1rem 0 !important;
+    border: none;
+    border-top: 1px solid rgba(11, 26, 0, 0.2);
+}

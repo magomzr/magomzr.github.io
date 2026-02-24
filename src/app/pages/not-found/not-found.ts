@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Footer } from '../../components/footer/footer';
+import { BackToPosts } from '../../components/back-to-posts/back-to-posts';
 
 @Component({
   selector: 'app-not-found',
-  imports: [Footer],
+  imports: [BackToPosts],
   templateUrl: './not-found.html',
   styleUrl: './not-found.css',
 })
