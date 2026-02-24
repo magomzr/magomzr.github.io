@@ -65,3 +65,10 @@ div img {
     border: none;
     border-top: 1px solid rgba(11, 26, 0, 0.2);
 }
+
+::ng-deep img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 1.5rem auto;
+}
