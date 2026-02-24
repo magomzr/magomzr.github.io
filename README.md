@@ -1,59 +1,52 @@
-# MagomzrGithubIo
+[![Deploy static content to Pages](https://github.com/magomzr/magomzr.github.io/actions/workflows/main.yml/badge.svg)](https://github.com/magomzr/magomzr.github.io/actions/workflows/main.yml)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.5.
+# /home/mago
 
-## Development server
+A minimalist tech blog built with Angular 21 and deployed on GitHub Pages.
 
-To start a local development server, run:
+## Tech Stack
 
-```bash
-ng serve
-```
+- Angular 21 with standalone components and signals
+- TypeScript
+- Vitest for unit testing
+- pnpm for package management
+- GitHub Actions for CI/CD
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Features
 
-## Code scaffolding
+- Static post rendering from JSON
+- Tag-based filtering
+- Hash-based routing for GitHub Pages compatibility
+- Responsive minimalist design
+- Full test coverage
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Development
 
 ```bash
-ng build
+# Install dependencies
+pnpm install
+
+# Start dev server
+pnpm start
+
+# Run tests
+pnpm test
+
+# Build for production
+pnpm build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Project Structure
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+```
+src/app/
+├── components/     # Reusable UI components
+├── pages/          # Route components
+├── services/       # Data services
+├── guards/         # Route guards
+└── types/          # TypeScript interfaces
 ```
 
-## Running end-to-end tests
+## License
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT
