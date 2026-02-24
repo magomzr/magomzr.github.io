@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { map, switchMap } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { Entry } from '../../components/entry/entry';
 import { BackToPosts } from '../../components/back-to-posts/back-to-posts';
@@ -14,12 +15,15 @@ import { BackToPosts } from '../../components/back-to-posts/back-to-posts';
 export class Tags {
   private readonly route = inject(ActivatedRoute);
   private readonly postService = inject(PostService);
-  readonly tag: string;
-  posts = toSignal(this.postService.getPostByTag(this.route.snapshot.paramMap.get('tag') || ''), {
-    initialValue: [],
+
+  tag = toSignal(this.route.paramMap.pipe(map((params) => params.get('tag') || '')), {
+    initialValue: '',
   });
 
-  constructor() {
-    this.tag = this.route.snapshot.paramMap.get('tag') || '';
-  }
+  posts = toSignal(
+    this.route.paramMap.pipe(
+      switchMap((params) => this.postService.getPostByTag(params.get('tag') || '')),
+    ),
+    { initialValue: [] },
+  );
 }
