@@ -12,7 +12,11 @@ export class Navbar {
   routes = [
     {
       path: '/',
-      title: '/home',
+      title: '/',
+    },
+    {
+      path: '/about',
+      title: '/usr',
     },
     {
       path: 'mailto:mariogomezarr@gmail.com',

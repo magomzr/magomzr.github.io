@@ -1,9 +1,3 @@
 @for (post of posts(); track post.id) {
-  <p>{{ post.createdAt | date: 'longDate' }}</p>
-  <h2>{{ post.title }}</h2>
-  <p>{{ post.summary }}</p>
-  <!-- <div [innerHtml]="post.body"></div> -->
-  <p>tags: {{ post.tags.join(', ') }}</p>
-
-  <hr />
+<app-entry [post]="post"></app-entry>
 }
