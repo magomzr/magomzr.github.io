@@ -1,0 +1,17 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  max-width: 50%;
+}
+
+a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+a:hover {
+  text-decoration: underline;
+}

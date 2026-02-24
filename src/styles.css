@@ -1,0 +1,31 @@
+@font-face {
+  font-family: latin-roman;
+  src: url(../public/fonts/LatinRoman.otf) format('opentype');
+}
+
+/* .original-colors {
+  background-color: rgb(11, 26, 0);
+  color: rgb(229, 229, 229);
+  .selected {
+    color: rgb(251, 191, 36);
+  }
+} */
+
+/* @font-face {
+  font-family: 'Courier New', Courier, monospace;
+  src: url(../public/fonts/LatinRoman.otf) format('opentype');
+} */
+
+html,
+body {
+  font-family: 'latin-roman';
+  /* color: rgba(67, 67, 67); */
+  color: black;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 0 100px;
+}
+
+.selected {
+  color: rgb(0, 0, 0);
+}
