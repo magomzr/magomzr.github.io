@@ -1,5 +1,9 @@
 <div class="navbar-container">
   @for (route of routes; track route.title) {
-    <a routerLink="{{ route.path }}">{{ route.title }} </a>
+    @if (route.url) {
+      <a href="{{ route.path }}" target="_blank">{{ route.title }} </a>
+    } @else {
+      <a routerLink="{{ route.path }}">{{ route.title }} </a>
+    }
   }
 </div>

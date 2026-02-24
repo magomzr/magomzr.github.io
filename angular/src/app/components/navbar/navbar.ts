@@ -11,16 +11,23 @@ import { RouterLink } from '@angular/router';
 export class Navbar {
   routes = [
     {
-      path: '/home',
+      path: '/',
       title: '/home',
     },
     {
-      path: '/email',
+      path: 'mailto:mariogomezarr@gmail.com',
       title: '/email',
+      url: true,
     },
     {
-      path: '/linkedin',
+      path: 'https://www.linkedin.com/in/mariogomeza/',
       title: '/linkedin',
+      url: true,
+    },
+    {
+      path: 'https://github.com/magomzr',
+      title: '/github',
+      url: true,
     },
   ];
 }
