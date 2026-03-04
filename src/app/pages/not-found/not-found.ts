@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { BackToPosts } from '../../components/back-to-posts/back-to-posts';
 
 @Component({
@@ -7,4 +8,10 @@ import { BackToPosts } from '../../components/back-to-posts/back-to-posts';
   templateUrl: './not-found.html',
   styleUrl: './not-found.css',
 })
-export class NotFound {}
+export class NotFound implements OnInit {
+  private readonly titleService = inject(Title);
+
+  ngOnInit() {
+    this.titleService.setTitle('404 - /home/mago');
+  }
+}

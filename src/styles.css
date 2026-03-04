@@ -5,8 +5,13 @@
 }
 
 @font-face {
-  font-family: latin-roman;
-  src: url(../public/fonts/LatinRoman.otf) format('opentype');
+  font-family: dm-mono;
+  src: url(../public/fonts/DMMono-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: dm-mono-regular;
+  src: url(../public/fonts/DMMono-Medium.ttf) format('truetype');
 }
 
 @font-face {
@@ -16,7 +21,8 @@
 
 html,
 body {
-  font-family: 'latin-roman', serif;
+  font-family: 'dm-mono', serif;
+  font-size: 14px;
   background-color: rgb(229, 229, 229);
   color: rgb(11, 26, 0);
   line-height: 1.6;
@@ -36,6 +42,10 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'dm-mono-regular', serif;
 }
 
 h1 {

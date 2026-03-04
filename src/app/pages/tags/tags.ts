@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, switchMap } from 'rxjs';
@@ -15,6 +16,7 @@ import { BackToPosts } from '../../components/back-to-posts/back-to-posts';
 export class Tags {
   private readonly route = inject(ActivatedRoute);
   private readonly postService = inject(PostService);
+  private readonly titleService = inject(Title);
 
   tag = toSignal(this.route.paramMap.pipe(map((params) => params.get('tag') || '')), {
     initialValue: '',
@@ -26,4 +28,10 @@ export class Tags {
     ),
     { initialValue: [] },
   );
+
+  constructor() {
+    effect(() => {
+      this.titleService.setTitle(`#${this.tag()} - /home/mago`);
+    });
+  }
 }
