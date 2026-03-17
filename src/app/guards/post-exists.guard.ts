@@ -6,9 +6,9 @@ import { map } from 'rxjs';
 export const postExistsGuard: CanActivateFn = (route) => {
   const postService = inject(PostService);
   const router = inject(Router);
-  const id = route.paramMap.get('id') || '';
+  const slug = route.paramMap.get('slug') || '';
 
   return postService
-    .getPostById(id)
+    .getPostBySlug(slug)
     .pipe(map((post) => (post ? true : router.createUrlTree(['/not-found']))));
 };

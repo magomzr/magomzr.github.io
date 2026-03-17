@@ -1,4 +1,4 @@
-import { Component, inject, Signal, OnInit, effect } from '@angular/core';
+import { Component, inject, Signal, effect } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../../services/post.service';
@@ -13,16 +13,16 @@ import { BackToPosts } from '../../components/back-to-posts/back-to-posts';
   templateUrl: './posts.html',
   styleUrl: './posts.css',
 })
-export class Posts implements OnInit {
+export class Posts {
   private readonly route = inject(ActivatedRoute);
   private readonly postService = inject(PostService);
   private readonly titleService = inject(Title);
-  readonly id: string;
+  readonly slug: string;
   post: Signal<Post | undefined>;
 
   constructor() {
-    this.id = this.route.snapshot.paramMap.get('id') || '';
-    this.post = toSignal(this.postService.getPostById(this.id));
+    this.slug = this.route.snapshot.paramMap.get('slug') || '';
+    this.post = toSignal(this.postService.getPostBySlug(this.slug));
 
     effect(() => {
       const currentPost = this.post();
@@ -31,6 +31,4 @@ export class Posts implements OnInit {
       }
     });
   }
-
-  ngOnInit() {}
 }

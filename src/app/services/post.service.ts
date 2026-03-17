@@ -13,8 +13,8 @@ export class PostService {
     return this.http.get<Post[]>('posts/index.json').pipe(catchError(() => of([])));
   }
 
-  getPostById(id: string): Observable<Post | undefined> {
-    return this.getAllPosts().pipe(map((posts) => posts.find((post) => post.id === id)));
+  getPostBySlug(slug: string): Observable<Post | undefined> {
+    return this.getAllPosts().pipe(map((posts) => posts.find((post) => post.slug === slug)));
   }
 
   getPostByTag(tag: string): Observable<Post[]> {

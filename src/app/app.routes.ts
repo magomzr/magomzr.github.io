@@ -11,7 +11,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
   },
   {
-    path: 'posts/:id',
+    path: 'posts/:slug',
     canActivate: [postExistsGuard],
     loadComponent: () => import('./pages/posts/posts').then((m) => m.Posts),
   },
