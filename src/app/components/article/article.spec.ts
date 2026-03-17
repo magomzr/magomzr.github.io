@@ -20,6 +20,7 @@ describe('Article', () => {
       body: '<p>Test</p>',
       summary: 'Summary',
       createdAt: '2024-01-01',
+      slug: 'dummy-slug',
       tags: ['test'],
     };
     fixture.detectChanges();

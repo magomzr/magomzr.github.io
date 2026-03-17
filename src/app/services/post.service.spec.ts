@@ -16,6 +16,7 @@ describe('PostService', () => {
       body: '<p>Test</p>',
       summary: 'Summary',
       createdAt: '2024-01-01',
+      slug: 'dummy-slug',
       tags: ['test', 'angular'],
     },
   ];
@@ -48,7 +49,7 @@ describe('PostService', () => {
   });
 
   it('should get post by id', async () => {
-    const postPromise = firstValueFrom(service.getPostById('1'));
+    const postPromise = firstValueFrom(service.getPostBySlug('dummy-slug'));
 
     const req = httpMock.expectOne('posts/index.json');
     req.flush(mockPosts);
